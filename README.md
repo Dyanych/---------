@@ -8,6 +8,7 @@
   - [FizzBuzz](https://github.com/Dyanych/Algorithms/blob/master/Task1/FizzBuzz.py)  - ***готово***
   - Факториал 
   - Проверка числа на простоту
+  - Числа Фибоначи
 
 * Стек и очередь - релизовать
 
