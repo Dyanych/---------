@@ -5,8 +5,8 @@ class ListNode:
         self.next = next
         
 def reverseList(self, head: ListNode) -> ListNode:
-    def revert(current: ListNode):
-        temporary, final = None, None
+    def revertIter(current: ListNode):
+        final = None
 
         while current:
             temporary = current.next
@@ -15,4 +15,15 @@ def reverseList(self, head: ListNode) -> ListNode:
             current = temporary
 
         return final
-    return revert(head)
+
+    def revertRec(current, final = None):
+        if current:
+            return None
+        temporary = current.next
+        current.next =final
+        final = current
+        current = temporary
+        return revertRec(current, final)
+
+    #return revertIter(head) # Use Iteration
+    return revertRec(head) #Use Recurtion
