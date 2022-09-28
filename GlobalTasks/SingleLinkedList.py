@@ -18,9 +18,9 @@ def reverseList(self, head: ListNode) -> ListNode:
 
     def revertRec(current, final = None):
         if current:
-            return None
+            return final
         temporary = current.next
-        current.next =final
+        current.next = final
         final = current
         current = temporary
         return revertRec(current, final)
