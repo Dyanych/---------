@@ -1,16 +1,8 @@
+from functools import reduce
 import random
 import time
 
 # All type of sorting algorithms
-
-def myIncert(arrSorted: list, new) -> list:
-    try:
-        j = 0
-        while arrSorted[j] < new:
-            j += 1
-        return arrSorted[:j] + [new] + arrSorted[j:]
-    except:
-        return arrSorted + [new]
 
 def selectSort(arr: list) -> list:
     # 1. Selection sort
@@ -43,18 +35,65 @@ def bubbleSort(arr: list) -> list:
             break
     return arr
 
-# 4. Merge sort
-# 5. Heap sort
+def mergeSort(arr: list) -> list:
+    # 4. Merge sort
+    n = len(arr)
+    # Split recusively
+    if n <= 1:
+        return arr
+    else:
+        arr1 = mergeSort(arr[:n//2])
+        arr2 = mergeSort(arr[n//2:])
+
+        arr.clear()
+    
+    # Merge the chunks
+        while arr1 and arr2:
+            if arr1[0] <= arr2[0]:
+                arr.append(arr1[0])
+                arr1.pop(0)
+            else:
+                arr.append(arr2[0])
+                arr2.pop(0)
+        arr.extend(arr1 + arr2)
+    return arr
+
+def heapSort(arr: list) -> list:
+    # 5. Heap sort
+    pass
+
+def msdSort(arr: list) -> list:
+    # 6. MSD sort
+    pass
+
+def lsdSort(arr: list) -> list:
+    # 7. LSD Sort
+    i = 0
+    runNext = True
+
+    while runNext:
+        digiDict = {i:[] for i in (0,1,2,3,4,5,6,7,8,9)}
+        runNext = False
+        for x in arr:
+            digi = x%(10**(i+1))//(10**i)
+            runNext |= digi
+            digiDict[digi].append(x)
+        arr.clear()
+        # print('*****', arr)
+        arr = reduce(lambda x, y: x + y, [digiDict[i] for i in (0,1,2,3,4,5,6,7,8,9)])
+        # print(i, '-->', arr)
+        i += 1
+    return arr
 
 # Generate not sorted list
 # m = random.randint(1, 1000)
-m = 10
+m = 10000
 inList = random.sample(range(m+1),m)
-# inList = [4,3,2,1]
+# inList = [2,1]
 print(inList)
 
 start = time.time()
-bubbleSort(inList)
+lsdSort(inList)
 print(inList)
 end = time.time()
 print(end - start)
